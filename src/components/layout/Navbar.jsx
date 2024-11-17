@@ -1,75 +1,50 @@
-import { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom'
 import {Trophy, MessageSquare, MessagesSquare, Search} from 'lucide-react'
 import UserAvatar from '../../assets/user.png'
 import Logo from '../../assets/logo-stackoverflow.png'
 import AltLogo from '../../assets/stack-logo.png'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
-    
-    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 710);
 
-    useEffect(() => {
-        const handleResize = () =>{
-            setIsSmallScreen(window.innerWidth <= 710)
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () =>{
-            window.removeEventListener('resize', handleResize)
-        }
-    }, []);
 
   return (
-    <nav className='flex items-center justify-between px-6 py-4 bg-white'>
-        {/* logo */}
-        <div className='flex items-center space-x-4'>
-
-            {/* conditionally render logo based on screen size */}
-            {isSmallScreen ? (
-              <Link>
-              <img src={AltLogo} alt="logo" className='w-40 h-10 cursor-pointer'/>
-              </Link>
-                
-            ) : (
-                <Link>
-                <img src={Logo} alt="logo" className='w-40 h-10 cursor-pointer' />
-                </Link>
-            )}
-        </div>
-
-        {/* Search bar and products link */}
-        <div className='flex items-center space-x-4'>
-            {/* searchbar */}
-            <div className='flex border rounded-full mx-4 px-4 py-2 hover:border-gray-500 '>
-            <input type="text"
-            placeholder='Search Your Answers Here...'
-            className='focus:outline-none text-slate-400 min-w-72' />
-            <Search className='text-amber-500'/>
+    <nav className="bg-white sticky top-0 z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <div className="hidden sm:block">
+              <img src={Logo} alt='logo' className="h-8 w-auto" />
             </div>
+            <div className="block sm:hidden">
+              <img src={AltLogo} alt='logo-small' className="h-8 w-auto" />
+            </div>
+          </div>
 
-            {/* products link */}
-            <Link to={'/products'} className='text-slate-500 hover:text-slate-700'>
-            Products
-            </Link>
-        </div>
+          {/* Search Box */}
+          <div className="flex-1 mx-6 relative">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full border rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+            <Search className="absolute top-1/2 right-3 transform -translate-y-1/2 text-amber-600  cursor-pointer" />
+          </div>
 
-        {/* Icons */}
-        <div className='flex items-center space-x-6'>
-            <Link to={'/comments'} className='text-slate-500 hover:text-slate-700'>
-            <MessageSquare/>
-            </Link>
-            <Link to={'trophies'}  className='text-slate-500 hover:text-slate-700'>
-            <Trophy/>
-            </Link>
-            <Link to={'/discussion'} className='text-slate-500 hover:text-slate-700'>
-            <MessagesSquare/>
-            </Link>
-            <Link to={'/user'}>
-            <img src={UserAvatar} alt="user" className='w-14 h-14 border rounded-full border-amber-500' />
-            </Link>
+          {/* Products */}
+          <div className='mr-20'>
+            <Link to={'/products'} >Products</Link>
+          </div>
+
+          {/* Icons */}
+          <div className="flex items-center space-x-4">
+            <MessageSquare className="text-gray-600 text-xl cursor-pointer hover:text-orange-500" />
+            <Trophy className="text-gray-600 text-xl cursor-pointer hover:text-orange-500" />
+            <MessagesSquare className="text-gray-600 text-xl cursor-pointer hover:text-orange-500" />
+            <img src={UserAvatar} alt="user-avatar" className='w-10 border rounded-full hover:border-amber-600 cursor-pointer' />
+          </div>
         </div>
+      </div>
     </nav>
   )
 }

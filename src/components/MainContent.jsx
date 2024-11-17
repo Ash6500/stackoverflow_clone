@@ -1,24 +1,25 @@
 import LeftSidebar from "./LeftSidebar"
+import RightSidebar from "./RightSidebar";
 
 const MainContent = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 min-h-screen">
-      {/* Left Sidebar */}
-      <div className="lg:col-span-3 p-4 bg-gray-200">
-        <LeftSidebar/>
+    <div className="flex flex-col md:flex-row min-h-screen">
+      {/* Left Bar */}
+      <LeftSidebar/>
+
+      {/* Main Content */}
+      <div className="flex-1 bg-white p-6 border-b">
+        <h1 className="text-2xl font-bold mb-4">Main Content Area</h1>
+        <p>
+          This is the main content area. It takes up the most space and serves as the focal
+          point of the page.
+        </p>
       </div>
 
-      {/* content */}
-      <div className="lg:col-span-6 p-4">
-        Main content
-      </div>
-
-      {/* Right Sidebar */}
-      <div className="lg:col-span-3 p-4 bg-gray-200">
-        Right sidebar
-      </div>
+      {/* Right Bar */}
+      <RightSidebar/>
     </div>
-  )
-}
+  );
+};
 
-export default MainContent
+export default MainContent;
